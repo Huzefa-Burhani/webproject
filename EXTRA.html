@@ -1,0 +1,598 @@
+SIGN UP
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Signup</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            display: flex;
+            width: 850px;
+            height: 450px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        .left {
+            width: 50%;
+            background: linear-gradient(to right, #1E3C72, #2A5298);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px;
+        }
+        .left h2 {
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+        .left p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .left button {
+            background-color: white;
+            color: #2A5298;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .right {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            padding: 40px;
+        }
+        .form-container {
+            text-align: center;
+            width: 100%;
+        }
+        .form-container h2 {
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .social-icons img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+            background-color: white;
+        }
+        .form-container input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .form-container button {
+            background-color: #2A5298;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: -8px;
+            margin-bottom: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <h2>Hello, Friend!</h2>
+            <p>Register with your details to use all of site features</p>
+            <a href="Login.html">
+                <button>SIGN IN</button>
+            </a>
+        </div>
+        <div class="right">
+            <div class="form-container">
+                <h2>Create Account</h2>
+                <div class="social-icons">
+                    <img src="GOOGLEIMAGE.png" alt="Google">
+                    <img src="LINKDEIN.webp" alt="LinkedIn">
+                </div>
+                <p>or use your email for registration</p>
+                <input type="text" id="name" placeholder="Name">
+                <input type="email" id="email" placeholder="Email">
+                <p class="error" id="emailError">Invalid email format</p>
+                <input type="password" id="password" placeholder="Password">
+                <p class="error" id="passwordError">Password must be at least 6 characters</p>
+                <button onclick="validateForm()">SIGN UP</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let emailInput = document.getElementById("email");
+            let passwordInput = document.getElementById("password");
+            emailInput.addEventListener("blur", validateEmail);
+            passwordInput.addEventListener("blur", validatePassword);
+        });
+        function validateEmail() {
+            let email = document.getElementById("email").value;
+            let emailError = document.getElementById("emailError");
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+            if (!emailPattern.test(email)) {
+                emailError.style.display = "block";
+            } else {
+                emailError.style.display = "none";
+            }
+        }   
+        function validatePassword() {
+            let password = document.getElementById("password").value;
+            let passwordError = document.getElementById("passwordError");
+    
+            if (password.length < 6) {
+                passwordError.style.display = "block";
+            } else {
+                passwordError.style.display = "none";
+            }
+        }
+        function validateForm() {
+            validateEmail();
+            validatePassword();
+    
+            let emailError = document.getElementById("emailError").style.display;
+            let passwordError = document.getElementById("passwordError").style.display;
+    
+            if (emailError === "none" && passwordError === "none") {
+                alert("Registration Successful!");
+                return true;
+            }
+            return false;
+        }
+    </script>
+</body>
+</html> -->
+
+
+Login
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Signup</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f8f9fa;
+        }
+        .container {
+            display: flex;
+            width: 800px;
+            height: 500px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            background: white;
+            position: relative;
+        }
+        .form-container {
+            width: 50%;
+            padding: 40px;
+            position: absolute;
+            top: 0;
+            height: 100%;
+            transition: transform 0.5s ease-in-out;
+            background: white;
+        }
+        .signin-container {
+            left: 0;
+            transform: translateX(0);
+            z-index: 2;
+        }
+        .signup-container {
+            left: 0;
+            transform: translateX(100%);
+            z-index: 1;
+        }
+        .toggle-container {
+            width: 50%;
+            background: linear-gradient(to right, #0086c3, #00b4db);
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            transition: transform 0.5s ease-in-out;
+            position: absolute;
+            right: 0;
+            height: 100%;
+            border-top-left-radius: 50px;
+            border-bottom-left-radius: 50px;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .social-icons img {
+            width: 30px;
+            cursor: pointer;
+        }
+        .forgot-password {
+            display: block;
+            text-align: right;
+            font-size: 12px;
+            margin-bottom: 10px;
+            color: #007BFF;
+            cursor: pointer;
+        }
+        .toggle-button {
+            background: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            color: black;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .toggle-button:hover {
+            background: rgba(255, 255, 255, 0.8);
+        }
+        /* Style for error message */
+        .error-message {
+            color: red;
+            font-size: 12px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container signin-container" id="signin">
+            <h2>Login</h2>
+            <div class="social-icons">
+                <img src="GOOGLEIMAGE.png" alt="Google">
+                <img src="LINKDEIN.webp" alt="LinkedIn">
+            </div>
+            <p>or use your email/password</p>
+            <input type="email" id="email" placeholder="Email">
+            <p class="error-message" id="email-error">Invalid email format</p>
+            <input type="password" placeholder="Password">
+            <a class="forgot-password">Forgot Your Password?</a>
+            <button>Login</button>
+        </div>
+        
+        <div class="toggle-container" id="toggle">
+            <h2>Welcome Back!</h2>
+            <p>Enter your personal details to use all of site features</p>
+            <a href="SignUp.html">
+                <button class="toggle-button" onclick="toggleForms()">Sign Up</button>
+            </a>
+        </div>
+    </div>
+    <script>
+        function validateEmail(email) {
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            return emailRegex.test(email);
+        }
+    
+        document.getElementById("email").addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                checkEmail();
+            }
+        });
+        document.getElementById("email").addEventListener("blur", checkEmail);
+    
+        function checkEmail() {
+            const emailField = document.getElementById("email");
+            const errorMessage = document.getElementById("email-error");
+    
+            if (!validateEmail(emailField.value)) {
+                errorMessage.style.display = "block";
+            } else {
+                errorMessage.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>  -->
+
+
+server.js
+// const express = require('express');
+// const { Sequelize, DataTypes } = require('sequelize');
+// const bcrypt = require('bcryptjs');
+// const cors = require('cors');
+// const bodyParser = require('body-parser');
+// const jwt = require('jsonwebtoken');
+// require('dotenv').config();
+// const app = express();
+// const PORT = process.env.PORT || 5000;
+// const SECRET_KEY = process.env.JWT_SECRET;
+// app.use(cors());
+// app.use(bodyParser.json());
+
+// const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
+//     host: process.env.DB_HOST || '127.0.0.1',
+//     port: process.env.DB_PORT || 3306,
+//     dialect: 'mysql',
+//     logging: false
+// });
+
+// sequelize.authenticate()
+//     .then(() => console.log('Database connected'))
+//     .catch(err => console.error('Database connection error:', err));
+// const User = sequelize.define('User', {
+//     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
+//     name: { type: DataTypes.STRING, allowNull: false },
+//     email: { type: DataTypes.STRING, allowNull: false, unique: true },
+//     password: { type: DataTypes.STRING, allowNull: false }
+// }, { timestamps: true });
+
+// sequelize.sync()
+//     .then(() => console.log('Database & tables created'))
+//     .catch(err => console.error('Error syncing database:', err));
+// const authenticateToken = (req, res, next) => {
+//     const token = req.header('Authorization');
+//     if (!token) return res.status(401).json({ message: 'Access denied. No token provided.' });
+
+//     try {
+//         const verified = jwt.verify(token, SECRET_KEY);
+//         req.user = verified;
+//         next();
+//     } catch (err) {
+//         res.status(403).json({ message: 'Invalid or expired token' });
+//     }
+// };
+// app.post('/register', async (req, res) => {
+//     const { name, email, password } = req.body;
+
+//     if (!name || !email || !password) {
+//         return res.status(400).json({ message: 'All fields are required' });
+//     }
+//     try {
+//         const existingUser = await User.findOne({ where: { email } });
+//         if (existingUser) {
+//             return res.status(400).json({ message: 'Email already registered' });
+//         }
+//         const hashedPassword = await bcrypt.hash(password, 12);
+//         await User.create({ name, email, password: hashedPassword });
+
+//         res.status(201).json({ message: 'User registered successfully' });
+//     } catch (error) {
+//         res.status(500).json({ message: 'Internal server error', error: error.message });
+//     }
+// });
+// app.post('/login', async (req, res) => {
+//     const { email, password } = req.body;
+
+//     if (!email || !password) {
+//         return res.status(400).json({ message: 'All fields are required' });
+//     }
+
+//     try {
+//         const user = await User.findOne({ where: { email } });
+//         if (!user) {
+//             return res.status(400).json({ message: 'Invalid email or password' });
+//         }
+
+//         const isMatch = await bcrypt.compare(password, user.password);
+//         if (!isMatch) {
+//             return res.status(400).json({ message: 'Invalid email or password' });
+//         }
+
+//         const token = jwt.sign({ id: user.id, email: user.email }, SECRET_KEY, { expiresIn: '2h' });
+
+//         res.json({ message: 'Login successful', token, user: { id: user.id, name: user.name, email: user.email } });
+//     } catch (error) {
+//         res.status(500).json({ message: 'Internal server error', error: error.message });
+//     }
+// });
+// app.get('/profile', authenticateToken, async (req, res) => {
+//     try {
+//         const user = await User.findByPk(req.user.id, { attributes: { exclude: ['password'] } });
+//         if (!user) return res.status(404).json({ message: 'User not found' });
+
+//         res.json(user);
+//     } catch (err) {
+//         res.status(500).json({ message: 'Internal server error', error: err.message });
+//     }
+// });
+// app.listen(PORT, () => {
+//     console.log(`Server running on http://localhost:${PORT}`);
+// });
+
+// const express = require('express');
+// const { Sequelize, DataTypes } = require('sequelize');
+// const bcrypt = require('bcryptjs');
+// const cors = require('cors');
+// const bodyParser = require('body-parser');
+// const jwt = require('jsonwebtoken');
+// require('dotenv').config();
+
+// const app = express();
+// const PORT = process.env.PORT || 5000;
+// const SECRET_KEY = process.env.JWT_SECRET || 'default_secret';
+
+// // Middleware
+// app.use(cors());
+// app.use(bodyParser.json());
+
+// // Database Connection
+// const sequelize = new Sequelize(process.env.DB_NAME || 'default_db', process.env.DB_USER || 'root', process.env.DB_PASS || '', {
+//     host: process.env.DB_HOST || '127.0.0.1',
+//     port: process.env.DB_PORT || 3306,
+//     dialect: 'mysql',
+//     logging: console.log,
+// });
+
+// (async () => {
+//     try {
+//         await sequelize.authenticate();
+//         console.log('✅ Database connected successfully.');
+//         await sequelize.sync();
+//         console.log('✅ Database & tables created.');
+//     } catch (err) {
+//         console.error('❌ Database connection error:', err);
+//         process.exit(1);
+//     }
+// })();
+
+// // Define User Model
+// const User = sequelize.define('User', {
+//     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
+//     name: { type: DataTypes.STRING, allowNull: false },
+//     email: { type: DataTypes.STRING, allowNull: false, unique: true },
+//     password: { type: DataTypes.STRING, allowNull: false }
+// }, { timestamps: true });
+
+// // Middleware to Authenticate Token
+// const authenticateToken = (req, res, next) => {
+//     const token = req.header('Authorization');
+//     if (!token) return res.status(401).json({ message: 'Access denied. No token provided.' });
+
+//     try {
+//         const verified = jwt.verify(token, SECRET_KEY);
+//         req.user = verified;
+//         next();
+//     } catch (err) {
+//         res.status(403).json({ message: 'Invalid or expired token' });
+//     }
+// };
+
+// // 🔹 Register User API
+// app.post('/register', async (req, res) => {
+//     const { name, email, password } = req.body;
+
+//     if (!name || !email || !password) {
+//         return res.status(400).json({ message: 'All fields are required' });
+//     }
+//     try {
+//         const existingUser = await User.findOne({ where: { email } });
+//         if (existingUser) {
+//             return res.status(400).json({ message: 'Email already registered' });
+//         }
+//         const hashedPassword = await bcrypt.hash(password, 12);
+//         const newUser = await User.create({ name, email, password: hashedPassword });
+
+//         res.status(201).json({ message: 'User registered successfully', user: newUser });
+//     } catch (error) {
+//         console.error('❌ Registration error:', error);
+//         res.status(500).json({ message: 'Internal server error', error: error.message });
+//     }
+// });
+
+// // 🔹 Login API
+// app.post('/login', async (req, res) => {
+//     const { email, password } = req.body;
+
+//     if (!email || !password) {
+//         return res.status(400).json({ message: 'All fields are required' });
+//     }
+
+//     try {
+//         const user = await User.findOne({ where: { email } });
+//         if (!user) {
+//             return res.status(400).json({ message: 'Invalid email or password' });
+//         }
+
+//         const isMatch = await bcrypt.compare(password, user.password);
+//         if (!isMatch) {
+//             return res.status(400).json({ message: 'Invalid email or password' });
+//         }
+
+//         const token = jwt.sign({ id: user.id, email: user.email }, SECRET_KEY, { expiresIn: '2h' });
+
+//         res.json({ message: 'Login successful', token, user: { id: user.id, name: user.name, email: user.email } });
+//     } catch (error) {
+//         console.error('❌ Login error:', error);
+//         res.status(500).json({ message: 'Internal server error', error: error.message });
+//     }
+// });
+
+// // 🔹 Get Profile API (Protected)
+// app.get('/profile', authenticateToken, async (req, res) => {
+//     try {
+//         const user = await User.findByPk(req.user.id, { attributes: { exclude: ['password'] } });
+//         if (!user) return res.status(404).json({ message: 'User not found' });
+
+//         res.json(user);
+//     } catch (err) {
+//         console.error('❌ Profile fetch error:', err);
+//         res.status(500).json({ message: 'Internal server error', error: err.message });
+//     }
+// });
+
+// // Start Server
+// app.listen(PORT, () => {
+//     console.log(`🚀 Server running on http://localhost:${PORT}`);
+// });

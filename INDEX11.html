@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Developer Roadmaps</title>
+    <link rel="stylesheet" href="STYLE11.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+</head>
+<body>
+    <div id="splash-screen">
+        <h1>Welcome to Roadmap Designer</h1>
+        <p>Loading...</p>
+        <div class="spinner"></div>
+    </div>
+    
+    <style>
+        #splash-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: #f4f4f4;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+    
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(0, 0, 0, 0.2);
+            border-top-color: #000;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+    
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(() => {
+                document.getElementById("splash-screen").style.display = "none";
+            }, 1000); // Reduce delay if possible
+        });
+    </script>    
+    
+    <!-- Main Content -->
+    <div id="main-content" style="display: none;">
+        <h1>Main Website</h1>
+        <p>This is the main content of the Roadmap Designer.</p>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="#">Start Here</a></li>
+            <li><a href="#">Roadmaps</a></li>
+            <li><a href="#">Teams</a></li>
+            <li class="login"><a href="Login.html">Login</a></li>
+            <li class="ExpertPanel"><a href="ExpertPanel.html">ExpertPanel</a></li>
+        </ul>
+    </nav>
+    <header>
+        <h1 class="wave-text" ><span>D</span>
+            <span>E</span>
+            <span>V</span>
+            <span>E</span>
+            <span>L</span>
+            <span>O</span>
+            <span>P</span>
+            <span>E</span>
+            <span>R</span>
+            <span>-</span>
+            <span>R</span>
+            <span>O</span>
+            <span>A</span>
+            <span>D</span>
+            <span>M</span>
+            <span>A</span>
+            <span>P</span>
+            <span>S</span>
+        </h1>
+        <div class="hover-container">
+            <h1 class="explosive-text">Browse the ever-growing list of up-to-date, community driven roadmaps</h1>
+        </div>
+        
+    </header>
+    <main>
+        <div class="roadmap-container"> 
+             <section class="categories">
+            
+                <h2>All Roadmaps</h2>
+                
+                <ul>
+                    <li><a href="#" onclick="openNewPage('Absolute Beginners')">Absolute Beginners</a></li>
+                    <li><a href="#" onclick="openNewPage('Web Development')">Web Development</a></li>
+                    <li><a href="#" onclick="openNewPage('Frontend')">Frontend</a></li>
+                    <li><a href="#" onclick="openNewPage('Backend')">Backend</a></li>
+                    <li><a href="#" onclick="openNewPage('Computer Science')">Computer Science</a></li>
+                    <li><a href="#" onclick="openNewPage('Machine Learning')">Machine Learning</a></li>
+                </ul>
+            </section>
+            <section class="roadmaps">
+    <div class="roadmap-item"><a href="#" onclick="openNewPage('Frontend Beginner')">Frontend Beginner</a></div>
+    <div class="roadmap-item"><a href="#" onclick="openNewPage('DevOps Beginner')">DevOps Beginner</a></div>
+    <div class="roadmap-item"><a href="#" onclick="openNewPage('Frontend')">Frontend</a></div>
+    <div class="roadmap-item"><a href="#" onclick="openNewPage('Backend')">Backend</a></div>
+    <div class="roadmap-item"><a href="#" onclick="openNewPage('Full Stack')">Full Stack</a></div>
+    <div class="roadmap-item"><a href="#" onclick="openNewPage('API Design')">API Design</a></div>
+    <div class="roadmap-item"><a href="#" onclick="openNewPage('QA')">QA</a></div>
+    <div class="roadmap-item"><a href="#" onclick="openNewPage('DevOps')">DevOps</a></div>
+    <div class="roadmap-item"><a href="#" onclick="openNewPage('Android')">Android</a></div>
+    <div class="roadmap-item"><a href="#" onclick="openNewPage('iOS')">iOS</a></div>
+    <div class="roadmap-item"><a href="#" onclick="openNewPage('SQL')">SQL</a></div>
+    <div class="roadmap-item"><a href="#" onclick="openNewPage('Software Engineer')">Software Engineer</a></div>
+    <div class="roadmap-item"><a href="#" onclick="openNewPage('Technical Writer')">Technical Writer</a></div>
+    <div class="roadmap-item"><a href="#" onclick="openNewPage('C')">C</a></div>
+    <div class="roadmap-item"><a href="#" onclick="openNewPage('AI and Data Scientist')">AI and Data Scientist</a></div>
+    <div class="roadmap-item"><a href="#" onclick="openNewPage('AI Engineer')">AI Engineer</a></div>
+    <div class="roadmap-item"><a href="#" onclick="openNewPage('Data Analyst')">Data Analyst</a></div>
+    <div class="roadmap-item"><a href="#" onclick="openNewPage('MLOps')">MLOps</a></div>
+    <div class="roadmap-item"><a href="#" onclick="openNewPage('Product Manager')">Product Manager</a></div>
+    <div class="roadmap-item"><a href="#" onclick="openNewPage('Engineering Manager')">Engineering Manager</a></div>
+    <div class="roadmap-item"><a href="#" onclick="openNewPage('Game Development')">Game Development</a></div>
+    <div class="roadmap-item"><a href="#" onclick="openNewPage('UX Design')">UX Design</a></div>
+    <div class="roadmap-item"><a href="#" onclick="openNewPage('Blockchain')">Blockchain</a></div>
+    <div class="roadmap-item"><a href="#" onclick="openNewPage('Cyber Security')">Cyber Security</a></div>
+            </section>
+        </div>  
+    </main>
+    <footer>
+        
+        <ul>
+            <li>
+              <a href="#">
+                <i class="fab fa-facebook-f icon"></i>    </a>
+            </li>
+            <li>
+              <a href="#"><i class="fab fa-twitter icon"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fab fa-linkedin-in icon"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fab fa-google-plus-g icon"></i></a>
+            </li>
+            <li>
+                <p>&copy; 2024 Your Company. All rights reserved.</p>
+            </li>
+          </ul>
+    </footer>
+    <script src="SCRIPT11.js"></script>
+</body>
+</html>
+

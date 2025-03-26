@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Roadmaps</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            transition: background 0.3s, color 0.3s;
+        }
+        nav {
+            background: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin: 10px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        nav ul li a:hover {
+            background: #555;
+        }
+
+        /* Sections */
+        .section {
+            display: none;
+            padding: 20px;
+            background: white;
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        .active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Home Button */
+        .home-button {
+            display: none;
+            position: fixed;
+            left: 20px;
+            top: 60px;
+            font-size: 16px;
+            padding: 8px 12px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Dark Mode */
+        .dark-mode {
+            background: #222;
+            color: white;
+        }
+        .dark-mode nav {
+            background: #111;
+        }
+        .dark-mode .section {
+            background: #333;
+            color: white;
+            box-shadow: none;
+        }
+        .toggle-dark-mode {
+            position: fixed;
+            right: 20px;
+            top: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            background: #444;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Dark Mode Toggle Button -->
+    <button class="toggle-dark-mode" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+
+    <!-- Home Button -->
+    <button class="home-button" onclick="goHome()">🏠 Home</button>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showSection('home')">Home</a></li>
+            <li><a href="#" onclick="showSection('getting-started')">Getting Started</a></li>
+            <li><a href="#" onclick="showSection('roadmaps')">Explore Roadmaps</a></li>
+            <li><a href="#" onclick="showSection('community')">Community</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sections -->
+    <div id="home" class="section active">
+        <h1>Welcome to Developer Roadmaps</h1>
+        <p>Start your learning journey with us.</p>
+    </div>
+
+    <div id="getting-started" class="section">
+        <h1>Getting Started</h1>
+        <p>This guide will help you navigate our platform.</p>
+    </div>
+
+    <div id="roadmaps" class="section">
+        <h1>Explore Developer Roadmaps</h1>
+        <p>Choose your path and start learning.</p>
+    </div>
+
+    <div id="community" class="section">
+        <h1>Join Our Community</h1>
+        <p>Connect, collaborate, and grow together.</p>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            var sections = document.querySelectorAll('.section');
+            sections.forEach(function(section) {
+                section.classList.remove('active');
+            });
+
+            // Show the clicked section
+            document.getElementById(sectionId).classList.add('active');
+
+            // Show home button if not on the home page
+            document.querySelector(".home-button").style.display = (sectionId !== "home") ? "block" : "none";
+        }
+
+        function goHome() {
+            showSection("home"); // Go back to home page
+        }
+
+        function toggleDarkMode() {
+            let body = document.body;
+            body.classList.toggle("dark-mode");
+
+            // Save dark mode state to local storage
+            if (body.classList.contains("dark-mode")) {
+                localStorage.setItem("darkMode", "enabled");
+            } else {
+                localStorage.setItem("darkMode", "disabled");
+            }
+        }
+
+        // Check if dark mode was enabled before
+        window.onload = function() {
+            if (localStorage.getItem("darkMode") === "enabled") {
+                document.body.classList.add("dark-mode");
+            }
+        };
+    </script>
+
+</body>
+</html>

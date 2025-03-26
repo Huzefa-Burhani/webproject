@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Signup</title>
+    <script type="module" src="login.js" defer></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f8f9fa;
+        }
+        .container {
+            display: flex;
+            width: 800px;
+            height: 500px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            background: white;
+            position: relative;
+        }
+        .form-container {
+            width: 50%;
+            padding: 40px;
+            position: absolute;
+            top: 0;
+            height: 100%;
+            transition: transform 0.5s ease-in-out;
+            background: white;
+        }
+        .signin-container {
+            left: 0;
+            transform: translateX(0);
+            z-index: 2;
+        }
+        .toggle-container {
+            width: 50%;
+            background: linear-gradient(to right, #0086c3, #00b4db);
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            transition: transform 0.5s ease-in-out;
+            position: absolute;
+            right: 0;
+            height: 100%;
+            border-top-left-radius: 50px;
+            border-bottom-left-radius: 50px;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .error-message {
+            color: red;
+            font-size: 12px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container signin-container" id="signin">
+            <h2>Login</h2>
+            <p>Use your email and password</p>
+            <input type="email" id="email" placeholder="Email">
+            <p class="error-message" id="email-error">Invalid email format</p>
+            <input type="password" id="password" placeholder="Password">
+            <p class="error-message" id="login-error"></p>
+            <button id="login-btn">Login</button>
+        </div>
+        <div class="toggle-container">
+            <h2>New Here?</h2>
+            <p>Sign up to access all features</p>
+            <a href="SignUp.html">
+                <button class="toggle-button">Sign Up</button>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function validateEmail(email) {
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            return emailRegex.test(email);
+        }
+
+        document.getElementById("email").addEventListener("blur", function () {
+            const emailField = document.getElementById("email");
+            const errorMessage = document.getElementById("email-error");
+
+            if (!validateEmail(emailField.value)) {
+                errorMessage.style.display = "block";
+            } else {
+                errorMessage.style.display = "none";
+            }
+        });
+
+        async function loginUser() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const loginError = document.getElementById("login-error");
+
+            if (!validateEmail(email)) {
+                loginError.textContent = "Invalid email format";
+                loginError.style.display = "block";
+                return;
+            }
+
+            try {
+                const response = await fetch("http://localhost:60573/login", {  // Updated Port Here
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include",
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert("Login successful!");
+                    window.location.href = "dashboard.html";
+                } else {
+                    loginError.textContent = data.message || "Login failed";
+                    loginError.style.display = "block";
+                }
+            } catch (error) {
+                loginError.textContent = "Error connecting to server. Try again later.";
+                loginError.style.display = "block";
+            }
+        }
+
+        document.getElementById("login-btn").addEventListener("click", loginUser);
+        document.getElementById("password").addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                loginUser();
+            }
+        });
+    </script>
+</body>
+</html>

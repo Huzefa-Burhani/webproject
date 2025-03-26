@@ -1,0 +1,267 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert Panel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            margin: 5px;
+            background: #007BFF;
+            color: white;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .dark-mode {
+            background-color: #333;
+            color: white;
+        }
+
+        .dark-mode .container {
+            background: #444;
+            color: white;
+        }
+
+        .project-card {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            box-shadow: 0px 0px 5px gray;
+            text-align: left;
+        }
+
+        .comment-box {
+            width: 100%;
+            margin-top: 5px;
+            padding: 8px;
+        }
+
+        .leaderboard {
+            margin-top: 20px;
+            padding: 10px;
+            background: #dff0d8;
+            border-radius: 5px;
+        }
+
+        input, select {
+            padding: 5px;
+            margin: 5px;
+        }
+
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+
+        .close {
+            float: right;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Expert Panel</h1>
+
+        <div class="button-container">
+            <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+            <button id="addProjectBtn">Add Project</button>
+            <button id="viewProjectsBtn">View Projects</button>
+            <button id="viewLeaderboard">View Leaderboard</button>
+        </div>
+
+        <div>
+            <input type="text" id="searchInput" placeholder="Search projects..." onkeyup="searchProjects()">
+            <select id="filterStatus" onchange="filterProjects()">
+                <option value="All">All</option>
+                <option value="Open">Open</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+            </select>
+        </div>
+
+        <div id="leaderboard" class="leaderboard" style="display: none;">
+            <h3>Top Contributors</h3>
+            <ol id="leaderboardList"></ol>
+        </div>
+    </div>
+
+    <div id="projectsList"></div>
+
+
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Add Project</h2>
+            <input type="text" id="projectTitle" class="input-field" placeholder="Project Title">
+            <textarea id="projectDescription" class="input-field" placeholder="Project Description"></textarea>
+            <input type="date" id="projectDeadline" class="input-field">
+            <button onclick="saveProject()">Save Project</button>
+        </div>
+    </div>
+
+    <script>
+        let projects = [];
+        let students = {};
+        let notifications = [];
+
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+        }
+
+        document.getElementById("addProjectBtn").addEventListener("click", function () {
+            document.getElementById("projectModal").style.display = "block";
+        });
+
+        function closeModal() {
+            document.getElementById("projectModal").style.display = "none";
+        }
+
+        function saveProject() {
+            let title = document.getElementById("projectTitle").value.trim();
+            let description = document.getElementById("projectDescription").value.trim();
+            let deadline = document.getElementById("projectDeadline").value;
+        
+            if (!title || !description || !deadline) {
+                alert("Please fill in all fields!");
+                return;
+            }
+        
+            let projectData = { title, description, deadline };
+        
+            fetch("http://localhost:60573/projects", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${getToken()}`  // ✅ Include JWT token for authentication
+                },
+                credentials: "include",  // ✅ Ensures authentication via HTTP-only cookies
+                body: JSON.stringify(projectData),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(err => { throw new Error(err.message); });
+                }
+                return response.json();
+            })
+            .then(data => {
+                alert("✅ Project added successfully!");
+                closeModal();
+                fetchProjects(); // ✅ Fetch updated projects from the database
+            })
+            .catch(error => {
+                console.error("❌ Error:", error);
+                alert("⚠️ Failed to add project: " + error.message);
+            });
+        }
+        
+        // ✅ Helper function to get the JWT token from cookies
+        function getToken() {
+            let match = document.cookie.match(/token=([^;]+)/);
+            return match ? match[1] : "";
+        }
+        
+        // ✅ Button event listener for viewing projects
+        document.getElementById("viewProjectsBtn").addEventListener("click", function () {
+            fetchProjects();  // ✅ Now properly fetches projects instead of displaying outdated data
+        });        
+
+        function displayProjects() {
+            let projectContainer = document.getElementById("projectsList");
+            projectContainer.innerHTML = "";
+
+            if (projects.length === 0) {
+                projectContainer.innerHTML = "<p>No projects added yet.</p>";
+                return;
+            }
+
+            projects.forEach((project, index) => {
+                let projectCard = document.createElement("div");
+                projectCard.className = "project-card";
+                projectCard.innerHTML = `
+                    <h3>${project.title}</h3>
+                    <p><b>Description:</b> ${project.description}</p>
+                    <p><b>Deadline:</b> ${project.deadline}</p>
+                    <p><b>Status:</b> ${project.status}</p>
+                    <p><b>Assigned To:</b> ${project.assignedTo || "None"}</p>
+                    <p><b>Likes:</b> ${project.likes}</p>
+                    <button onclick="likeProject(${index})">Like</button>
+                    <button onclick="assignStudent(${index})">Assign Student</button>
+                    <button onclick="updateStatus(${index})">Update Status</button>
+                    <button onclick="addComment(${index})">Add Comment</button>
+                    <button onclick="approveStudent(${index})">Approve Student</button>
+                    <div id="comments-${index}"></div>
+                `;
+                projectContainer.appendChild(projectCard);
+            });
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
